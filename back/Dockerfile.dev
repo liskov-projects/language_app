@@ -1,0 +1,25 @@
+
+# imports the official Go image for building the app
+FROM golang:1.23.3-alpine AS builder
+
+# gets the necessary tools | go pulls modules from git repos | alpine comes without git | install it here
+RUN apk add --no-cache git curl
+
+# sets the working repo in the container
+WORKDIR /app
+
+# gets the air tool for live reload (only in dev?)
+RUN go install github.com/air-verse/air@v1.61.7
+
+# copies go sum/mod files & dependencies
+COPY go.mod go.sum ./ 
+RUN go mod download
+
+# copies the rest of the app code
+COPY . .
+
+# exposes the port to use
+EXPOSE 8080
+
+# run the air tool
+CMD ["air"]

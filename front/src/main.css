@@ -1,0 +1,103 @@
+/* WARNING:
+NEVER EVER TOUCH THE ORDER OR EVEN BETTER ANYTHING HERE */
+
+@font-face {
+  font-family: PermanentMarker-Regular;
+  src: url("../fonts/PermanentMarker-Regular.ttf");
+}
+
+@font-face {
+  font-family: WinkyRough-VariableFont_wght;
+  src: url("../fonts/WinkyRough-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: WinkyRough-Italic-VariableFont_wght;
+  src: url("../fonts/WinkyRough-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-VariableFont_wght;
+  src: url("../fonts/Montserrat-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Italic-VariableFont_wght;
+  src: url("../fonts/Montserrat-Italic-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: SourGummy-VariableFont_wdth;
+  src: url("../fonts/SourGummy-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+  font-family: SourGummy-Italic-VariableFont_wdth, wght;
+  src: url("../fonts/SourGummy-VariableFont_wdth\,wdth\,wght.ttf");
+}
+
+/* MUST STAY HERE AFTER FONT IMPORTS */
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* colours */
+  --color-shell: #eeeee4;
+  --color-sand-base: #c8985f;
+  --color-mocha-base: #4d4a46;
+  --color-black: #2f2116;
+  --color-desert: #ef8e00;
+  --color-green: #518d3c;
+  --color-red: #c24b34;
+
+  /* fonts */
+  --font-marker: PermanentMarker-Regular, sans-serif;
+  --font-winky: WinkyRough-VariableFont_wght, sans-serif;
+  --font-winky-italic: WinkyRough-Italic-VariableFont_wght, sans-serif;
+  --font-mont: Montserrat-VariableFont_wght, sans-serif;
+  --font-mont-italic: Montserrat-Italic-VariableFont_wght, sans-serif;
+  --font-gummy: SourGummy-VariableFont_wdth, sans-serif;
+  --font-gummy-italic: SourGummy-Italic-VariableFont_wdth\wght, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-mocha-base;
+  }
+}
+
+/* custom utility classes */
+@layer utilities {
+  .form-box {
+    @apply w-full max-w-md sm:max-w-lg flex flex-col gap-4 items-center justify-center bg-mocha-base border-4 border-desert rounded-xl p-6 shadow-lg
+  }
+  .form-heading {
+    @apply text-lg sm:text-xl font-semibold tracking-wider text-desert font-winky mb-2
+  }
+  .form-input {
+    @apply w-full mb-4 p-2 border-2 rounded bg-shell focus:border-none focus:outline-none focus:ring-4 focus:ring-desert;
+  }
+  .error-message {
+    @apply text-red bg-shell px-2 rounded tracking-wide border-mocha-base font-winky;
+  }
+  .success-message {
+    @apply text-green bg-shell px-2 rounded tracking-wide border-mocha-base font-winky;
+  }
+  .nav-item {
+    @apply hover:transform hover:scale-150 transition-transform duration-300 sm:text-xl md:text-2xl mx-4 md:mx-6;
+  }
+  /* shown on the home page */
+  .main-content-row {
+    @apply w-full max-w-screen-xl flex flex-col sm:flex-row flex-wrap justify-center gap-8 mt-10
+  }
+  .main-content-card {
+    @apply sm:basis-1/3 bg-white dark:bg-black dark:text-white opacity-70 shadow-md rounded-2xl p-6 text-center transition hover:shadow-lg
+  }
+  .blob-button-style {
+    @apply relative w-32 h-16 sm:w-36 sm:h-20 md:w-40 md:h-24 transition-transform hover:-translate-y-1 cursor-pointer
+  }
+    .blob-button-label {
+    @apply absolute inset-0 z-10 flex items-center justify-center text-sm sm:text-base font-semibold font-winky pointer-events-none translate-y-[-10%]
+  
+  }
+}

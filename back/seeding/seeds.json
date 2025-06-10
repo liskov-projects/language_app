@@ -1,0 +1,119 @@
+[
+  {
+    "word": "karriny",
+    "translation": "people",
+    "example": "",
+    "translation_example": "",
+    "category": "karriny",
+    "pronunciation": "karriny",
+    "picture": "karriny"
+  },
+  {
+    "word": "pululu",
+    "translation": "newborn baby",
+    "example": "Pululu ama wakarra purnu-ngku ngunta.",
+    "translation_example": "The newborn baby is lying awake in the coolamon.",
+    "category": "karriny",
+    "pronunciation": "pululu",
+    "picture": "pululu"
+  },
+  {
+    "word": "pika-pikka",
+    "translation": "children",
+    "example": "Pika-pikka ajjul janta janta.",
+    "translation_example": "The children are standing around.",
+    "category": "karriny",
+    "pronunciation": "pika-pikka",
+    "picture": "pika-pikka"
+  },
+  {
+    "word": "jura",
+    "translation": "girl",
+    "example": "Jura-ngka ama nyayi pangkal nyanjjan.",
+    "translation_example": "The little girl is looking at something.",
+    "category": "karriny",
+    "pronunciation": "jura",
+    "picture": "jura"
+  },
+  {
+    "word": "kaarnu",
+    "translation": "boy",
+    "example": "Kaarnu ama wilyarr janta.",
+    "translation_example": "The boy is smiling.",
+    "category": "karriny",
+    "pronunciation": "kaarnu",
+    "picture": "kaarnu"
+  },
+  {
+    "word": "partarta",
+    "translation": "teenage girl",
+    "example": "Partarta partarta-jja ajjul nyanjjan.",
+    "translation_example": "The teenage girls are watching.",
+    "category": "karriny",
+    "pronunciation": "partarta",
+    "picture": "partarta"
+  },
+  {
+    "word": "marlarra",
+    "translation": "teenage boy",
+    "example": "Marlarra marlarra ajjul janta.",
+    "translation_example": "The teenage boys are standing.",
+    "category": "karriny",
+    "pronunciation": "marlarra",
+    "picture": "marlarra"
+  },
+  {
+    "word": "kirriji",
+    "translation": "woman",
+    "example": "Kirriji ama janta.",
+    "translation_example": "The woman is standing.",
+    "category": "karriny",
+    "pronunciation": "kirriji",
+    "picture": "kirriji"
+  },
+  {
+    "word": "kartti",
+    "translation": "man",
+    "example": "Kartti ama nyinnta mukkarti jangu.",
+    "translation_example": "A man is sitting with a hat on.",
+    "category": "karriny",
+    "pronunciation": "kartti",
+    "picture": "kartti"
+  },
+  {
+    "word": "wulkuman kirriji",
+    "translation": "old woman",
+    "example": "Wulkuman kirriji ama nyinta wilyarr janta.",
+    "translation_example": "The old woman is sitting laughing.",
+    "category": "karriny",
+    "pronunciation": "wulkuman_kirriji",
+    "picture": "wulkuman_kirriji"
+  },
+  {
+    "word": "pulkka",
+    "translation": "old man",
+    "example": "Pulkka ama nyinta.",
+    "translation_example": "The old man is sitting down.",
+    "category": "karriny",
+    "pronunciation": "pulkka",
+    "picture": "pulkka"
+  },
+  {
+    "word": "mijiji",
+    "translation": "white woman",
+    "example": "Mijiji ama nyinta miyilikari jangu kapi mukkarti jangu.",
+    "translation_example": "The white woman is sitting with glasses and a hat on.",
+    "category": "karriny",
+    "pronunciation": "mijiji",
+    "picture": "mijiji"
+  },
+  {
+    "word": "papulanyi",
+    "translation": "white man",
+    "example": "Papulanyi ama wilyarr janta.",
+    "translation_example": "The white man is smiling.",
+    "category": "karriny",
+    "pronunciation": "papulanyi",
+    "picture": "papulanyi"
+  }
+]

@@ -1,0 +1,61 @@
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+// types
+import { TypeWord, TypeCategory } from "../Types";
+
+const WordsContext = createContext<{
+  words: TypeWord[];
+  categories: TypeCategory[];
+}>({
+  words: [],
+  categories: [],
+});
+
+export function WordsContextProvider({ children }: { children: ReactNode }) {
+  const [words, setWords] = useState<TypeWord[]>([]);
+  const [categories, setCategories] = useState<TypeCategory[]>([]);
+
+  // effect to fetch ALL WORDS
+  useEffect(() => {
+    fetch("http://localhost:8081/words", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log("Fetched data: ", data);
+        setWords(data);
+      })
+      .catch((err) =>
+        console.error("Failed to fetch at the words at the front: ", err)
+      );
+  }, []);
+
+  //  gets ALL CATEGORIES
+  useEffect(() => {
+    fetch("http://localhost:8081/categories", {
+      method: "GET",
+    }).then((res) => res.json().then((data) => setCategories(data)));
+  }, []);
+  // console.log(words);
+  console.log(categories);
+
+  return (
+    <WordsContext.Provider value={{ words, categories }}>
+      {children}
+    </WordsContext.Provider>
+  );
+}
+
+export function useWordsContext() {
+  const context = useContext(WordsContext);
+  if (!context)
+    throw new Error(
+      "useWordsContext must be used within a WordContextProvider"
+    );
+  return context;
+}

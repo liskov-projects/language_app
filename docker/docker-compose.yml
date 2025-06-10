@@ -1,0 +1,77 @@
+services:
+  db:
+    env_file: ../.env
+    # image: verrakav/postgres
+    image: postgres:17
+    container_name: language_app
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: endangered_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d endangered_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5432" # not needed
+    volumes:
+      - endangered_db_data:/var/lib/postgresql/data # where the actual db is stored - will presist
+      - ./seeds:/seeds # mounts the seed file so they can be used with our command
+    networks:
+      - db_network
+  backend:
+    env_file: ../.env
+    build:
+      context: ../back
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8081:8080"
+    command: ["air"]
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: endangered_db
+    volumes:
+      - ../back:/app
+      - ../.env:/app/.env
+    depends_on:
+      - db
+    networks:
+      - db_network
+  # try to never use "" around commands
+
+  frontend:
+    build:
+      context: ../front
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5174:5173" # not needed
+    volumes:
+      - /app/node_modules # to NOT draw modules from local
+      - ../front:/app # should create a folder front inside app (in the container)
+    depends_on:
+      - backend
+    networks:
+      - db_network
+  migrate:
+    image: migrate/migrate
+    env_file: ../.env
+    command: >
+      -path=/migrations -database=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/endangered_db?sslmode=disable up
+    volumes:
+      - ./migrations:/migrations
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - db_network
+
+volumes:
+  endangered_db_data:
+
+networks:
+  db_network:
+    driver: bridge

@@ -1,0 +1,25 @@
+# import the official image
+# FROM node:24-bullseye is very big and doesn't solve the esbuild incompatibility
+FROM node:lts-alpine
+# set the working dir
+WORKDIR /app
+# copy setup files (is it . or ./ - NO difference)
+COPY package.json ./
+# run the download command
+RUN npm install
+#rebiuld esbuild for Alpine
+# RUN npm rebuild esbuild
+# copy the rest of the folder
+COPY . . 
+# run the rest of the app
+CMD ["npm", "run", "dev"] 
+
+
+
+# start minimal image ? - maybe not needed
+
+# set the workng dir for the rest of the app
+
+#copies the compiled binary from the builder stage (maybe skip this step)
+
+# command to execute the service in the continer
