@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function ThemeToggle() {
   //  sets the theme to the system / user preference
@@ -24,9 +26,13 @@ export default function ThemeToggle() {
     <button
       data-testid="themeToggle"
       onClick={() => setIsDark((prev) => !prev)}
-      className="p-2 rounded bg-white opacity-70 dark:bg-black dark:text-white cursor-pointer"
+      className="rounded dark:text-mocha cursor-pointer"
     >
-      Toggle {isDark ? "Light" : "Dark"} Mode
+      {isDark ? (
+        <FontAwesomeIcon icon={faSun} />
+      ) : (
+        <FontAwesomeIcon icon={faMoon} />
+      )}
     </button>
   );
 }

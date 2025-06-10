@@ -1,8 +1,11 @@
-import {Link} from "react-router-dom";
-import {useUserDataContext} from "../context/UserDataContext";
+//  hooks
+import { useUserDataContext } from "../context/UserDataContext";
+//  components
+import { Link } from "react-router-dom";
+import ThemeToggle from "./Buttons/ThemeToggle";
 
 export default function NavBar() {
-  const {isLoggedIn} = useUserDataContext();
+  const { isLoggedIn } = useUserDataContext();
 
   return (
     <nav>
@@ -23,13 +26,16 @@ export default function NavBar() {
         ) : (
           <LoggedInSegment />
         )}
+        <li className="nav-item">
+          <ThemeToggle />
+        </li>
       </ul>
     </nav>
   );
 }
 
 function LoggedInSegment() {
-  const {currentUser, logout} = useUserDataContext();
+  const { currentUser, logout } = useUserDataContext();
   return (
     <>
       <li className="nav-item">

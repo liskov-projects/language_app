@@ -1,5 +1,3 @@
-import ThemeToggle from "../Buttons/ThemeToggle";
-
 export default function HomePage() {
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-12 bg-mocha-light text-mocha-dark font-winky">
@@ -7,7 +5,6 @@ export default function HomePage() {
       <p className="text-xl sm:text-2xl font-medium">
         to Buryat E-Picture Dictionary!
       </p>
-      <ThemeToggle />
 
       {/* Acknowledgement */}
       <p className="w-full sm:w-4/5 lg:w-2/3 text-center mt-8 text-mocha-base font-winky-italic text-xl leading-relaxed">
