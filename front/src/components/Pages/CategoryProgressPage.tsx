@@ -49,7 +49,13 @@ export default function CategoryProgressPage() {
   );
 }
 
-const WordEntry = ({ index, word }: { word: TypeWordProgress }) => {
+const WordEntry = ({
+  index,
+  word,
+}: {
+  index: number;
+  word: TypeWordProgress;
+}) => {
   return (
     <li
       key={index}
