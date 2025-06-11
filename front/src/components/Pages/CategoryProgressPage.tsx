@@ -70,7 +70,7 @@ const WordEntry = ({
   );
 };
 
-const EmptyProgressList = ({ path }: { path: string }) => {
+const EmptyProgressList = ({ path }: { path: string | undefined }) => {
   const navigate = useNavigate();
 
   return (
@@ -81,6 +81,8 @@ const EmptyProgressList = ({ path }: { path: string }) => {
       <LittleBlobButton
         label="GO!"
         onClick={() => navigate(`/study/${path}`)}
+        type="button"
+        textColour="text-mocha-base"
       />
     </div>
   );
