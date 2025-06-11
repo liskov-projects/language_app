@@ -17,14 +17,10 @@ export default function MatchPictureTask({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
 
-  const handleSelect = (choice: string) => {
-    setSelected(choice);
-  };
-
-  const handleCheck = () => {
-    if (!selected) return;
-    onAnswer(selected === correctWord.word);
-  };
+  // const handleCheck = () => {
+  //   if (!selected) return;
+  //   onAnswer(selected === correctWord.word);
+  // };
 
   return (
     <>
@@ -40,7 +36,7 @@ export default function MatchPictureTask({
                 ? "border-4 border-desert bg-white"
                 : "border"
             }`}
-            onClick={() => handleSelect(opt.word)}
+            onClick={() => setSelected(opt.word)}
           >
             <img
               src={`/pictures/${opt.picture}.webp`}
@@ -51,9 +47,14 @@ export default function MatchPictureTask({
         ))}
       </div>
       <div className="flex flex-row sm:flex-row gap-4 mt-4 w-full justify-center">
-        <LittleBlobButton type="button" label="check" onClick={handleCheck} />
+        <LittleBlobButton type="button" label="check" onClick={() => handleCheck(selected, correctWord.word, onAnswer)} />
         <LittleBlobButton label="next" onClick={onNext} />
       </div>
     </>
   );
+}
+
+export function handleCheck(selected: string | null, answer: string, onAnswer: (result: boolean) => void) {
+    if (!selected) return;
+    onAnswer(selected === answer);
 }
