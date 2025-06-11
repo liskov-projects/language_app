@@ -1,11 +1,16 @@
-import { TBlobButton } from "../../Types";
+import { TButtonProps } from "../../Types";
+
+type LittleBBProps = TButtonProps & {
+  type: "submit" | "reset" | "button" | undefined;
+  textColour: string;
+};
 
 export default function LittleBlobButton({
   label,
   onClick,
   type,
   textColour = "text-shell",
-}: TBlobButton) {
+}: LittleBBProps) {
   return (
     <button className="blob-button-style" onClick={onClick} type={type}>
       <svg

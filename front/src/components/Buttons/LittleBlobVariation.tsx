@@ -1,10 +1,14 @@
-import { TBlobButton } from "../../Types";
+import { TButtonProps } from "../../Types";
+
+type LittleBBVariationProps = TButtonProps & {
+  textColour: string;
+};
 
 export default function LittleBlobVariation({
   label,
   onClick,
   textColour = "text-shell",
-}: TBlobButton) {
+}: LittleBBVariationProps) {
   return (
     <button className="blob-button-style" onClick={onClick}>
       <svg

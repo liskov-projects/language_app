@@ -50,11 +50,9 @@ export type BaseTaskProps = {
   onNext: () => void;
 }
 
-export type TBlobButton = {
+export type TButtonProps = {
   label: string;
-  onClick?: () => void;
-  type?: "submit" | "reset" | "button" | undefined;
-  textColour?: string;
+  onClick: () => void;
 };
 
 export interface TypeUserDataContext {

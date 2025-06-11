@@ -1,10 +1,14 @@
-import { TBlobButton } from "../../Types";
+import { TButtonProps } from "../../Types";
+
+type BlobButtonProps = TButtonProps & {
+  textColour: string;
+};
 
 export function BlobButton({
   label,
   onClick,
   textColour = "shell",
-}: TBlobButton) {
+}: BlobButtonProps) {
   return (
     <button
       onClick={onClick}
