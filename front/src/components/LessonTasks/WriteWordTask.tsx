@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { TypeWord } from "../../Types";
+import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
-// import useLesson from "../../hooks/useLesson";
+
+//  NOTE: combining prop types
+type WriteWordTaskProps = BaseTaskProps & {
+  correctWord: TypeWord;
+};
 
 export default function WriteWordTask({
   correctWord,
   onAnswer,
   onNext,
-}: {
-  correctWord: TypeWord;
-  onAnswer: (result: boolean) => void;
-  onNext: () => void;
-}) {
+}: WriteWordTaskProps) {
   const [answer, setAnswer] = useState<string>("");
   const [askFor, setAskFor] = useState<"word" | "translation">("word");
   // const {handleAnswerSubmit, handleNextTask} = useLesson();

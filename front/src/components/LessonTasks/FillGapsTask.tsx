@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { TypeWord } from "../../Types";
+import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
+
+type FillGapsTaskProps = BaseTaskProps & {
+  word: TypeWord;
+};
 
 export default function FillGapsTask({
   word,
   onAnswer,
   onNext,
-  setUserProgress,
-}: {
-  word: TypeWord;
-  onAnswer: (result: boolean) => void;
-  onNext: () => void;
-}) {
+}: FillGapsTaskProps) {
   const [answer, setAnswer] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +32,9 @@ export default function FillGapsTask({
           className="flex flex-col gap-4 w-full max-w-xl"
         >
           <p className="text-lg">Fill in the gap:</p>
-          <p className="text-xl font-semibold">{getGapSentence(word.example, word.word)}</p>
+          <p className="text-xl font-semibold">
+            {getGapSentence(word.example, word.word)}
+          </p>
           <input
             value={answer}
             onChange={handleChange}
@@ -50,10 +51,7 @@ export default function FillGapsTask({
   );
 }
 
-export function getGapSentence(example : string | null, targetWord : string) {
-    if (!example) return "";
-    return example.replace(
-      new RegExp(`\\b${targetWord}\\b`, "gi"),
-      "_____"
-    );
-  };
+export function getGapSentence(example: string | null, targetWord: string) {
+  if (!example) return "";
+  return example.replace(new RegExp(`\\b${targetWord}\\b`, "gi"), "_____");
+}

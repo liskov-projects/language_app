@@ -1,3 +1,5 @@
+
+// NOTE: types for the data floating around
 export interface TypeWord {
   id: number;
   word: string;
@@ -41,6 +43,12 @@ export interface TypeCategory {
 //   word: string;
 //   result: boolean | null; 
 // }
+
+// NOTE: types for components/hooks
+export type BaseTaskProps = {
+  onAnswer: (result: boolean) => void;
+  onNext: () => void;
+}
 
 export type TBlobButton = {
   label: string;

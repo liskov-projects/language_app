@@ -1,27 +1,20 @@
 import { useState } from "react";
-import { TypeWord } from "../../Types";
+import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
 import { handleCheck } from "../../utils/utils";
+
+type MatchPictureTaskProps = BaseTaskProps & {
+  correctWord: TypeWord;
+  options: TypeWord[];
+};
 
 export default function MatchPictureTask({
   correctWord,
   options,
   onAnswer,
   onNext,
-}: // setUserProgress
-{
-  correctWord: TypeWord;
-  options: TypeWord[];
-  onAnswer: (result: boolean) => void;
-  onNext: () => void;
-  // setUserProgress: () => void;
-}) {
+}: MatchPictureTaskProps) {
   const [selected, setSelected] = useState<string | null>(null);
-
-  // const handleCheck = () => {
-  //   if (!selected) return;
-  //   onAnswer(selected === correctWord.word);
-  // };
 
   return (
     <>
@@ -48,7 +41,11 @@ export default function MatchPictureTask({
         ))}
       </div>
       <div className="flex flex-row sm:flex-row gap-4 mt-4 w-full justify-center">
-        <LittleBlobButton type="button" label="check" onClick={() => handleCheck(selected, correctWord.word, onAnswer)} />
+        <LittleBlobButton
+          type="button"
+          label="check"
+          onClick={() => handleCheck(selected, correctWord.word, onAnswer)}
+        />
         <LittleBlobButton label="next" onClick={onNext} />
       </div>
     </>
