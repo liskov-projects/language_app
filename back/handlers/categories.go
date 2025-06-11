@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 	"language_app/db"
-
+	"log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,7 +21,12 @@ func GetCategories(c *gin.Context){
 	
 	defer rows.Close()
 
-	var categories []map[string]interface{}
+	type Category struct {
+		Name string `json:"name"`
+	}
+
+	var categories []Category
+	
 	for rows.Next(){
 
 		var category string
@@ -31,10 +36,12 @@ func GetCategories(c *gin.Context){
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to scan categories"})
 			return
 		}
-		categories = append(categories, gin.H{
-			"name": category,
+		categories = append(categories, Category{
+			Name: category,
 			// "translation": translation,
 		})
 	}
+
+	log.Printf("🌈 returning categories: %+v\n", categories)
 	c.JSON(http.StatusOK, categories)
 }

@@ -8,7 +8,6 @@ import (
 	"language_app/db"
 	"language_app/models"
 	"language_app/utils"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,7 +44,7 @@ func GetUserProgress(c *gin.Context){
 	defer rows.Close()
 
 	// collects tables data in here
-	var wordsProgress  make([]map[string]interface{}, 0)
+	wordsProgress := make([]map[string]interface{}, 0)
 
 	// loops to collect
 	for rows.Next(){

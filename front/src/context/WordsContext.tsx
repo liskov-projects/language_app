@@ -27,11 +27,11 @@ export function WordsContextProvider({ children }: { children: ReactNode }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Fetched data: ", data);
+        console.log("Fetched data ALL WORDS: ", data);
         setWords(data);
       })
       .catch((err) =>
-        console.error("Failed to fetch at the words at the front: ", err)
+        console.error("Failed to fetch words at the front: ", err)
       );
   }, []);
 
