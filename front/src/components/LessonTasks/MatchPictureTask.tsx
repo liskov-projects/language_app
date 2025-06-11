@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
+import { handleCheck } from "../../utils/utils";
 
 export default function MatchPictureTask({
   correctWord,
@@ -52,9 +53,4 @@ export default function MatchPictureTask({
       </div>
     </>
   );
-}
-
-export function handleCheck(selected: string | null, answer: string, onAnswer: (result: boolean) => void) {
-    if (!selected) return;
-    onAnswer(selected === answer);
 }

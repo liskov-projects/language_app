@@ -14,14 +14,6 @@ export default function FillGapsTask({
 }) {
   const [answer, setAnswer] = useState<string>("");
 
-  const getGapSentence = () => {
-    if (!word.example) return "";
-    return word.example.replace(
-      new RegExp(`\\b${word.word}\\b`, "gi"),
-      "_____"
-    );
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAnswer(e.target.value);
   };
@@ -41,7 +33,7 @@ export default function FillGapsTask({
           className="flex flex-col gap-4 w-full max-w-xl"
         >
           <p className="text-lg">Fill in the gap:</p>
-          <p className="text-xl font-semibold">{getGapSentence()}</p>
+          <p className="text-xl font-semibold">{getGapSentence(word.example, word.word)}</p>
           <input
             value={answer}
             onChange={handleChange}
@@ -57,3 +49,11 @@ export default function FillGapsTask({
     </>
   );
 }
+
+export function getGapSentence(example : string | null, targetWord : string) {
+    if (!example) return "";
+    return example.replace(
+      new RegExp(`\\b${targetWord}\\b`, "gi"),
+      "_____"
+    );
+  };
