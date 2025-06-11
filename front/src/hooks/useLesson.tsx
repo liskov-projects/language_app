@@ -72,16 +72,17 @@ const useLesson = () => {
     });
   };
 
-  function handleAnswerSubmit(result: "correct" | "incorrect") {
-    if (result === "correct") {
+  function handleAnswerSubmit(result : boolean) {
+    const resultMsg = result ? "correct" : "incorrect";
+    if (result) {
       setFeedback("Well Done!");
       setCorrectCount((prev) => prev + 1);
-      updateBoxOnAnswer(result);
+      updateBoxOnAnswer(resultMsg);
       // setLessonResults((prev) => (prev[index].result = true));
       checkTheWord();
     } else {
       setFeedback("Try again!");
-      updateBoxOnAnswer(result);
+      updateBoxOnAnswer(resultMsg);
       checkTheWord();
     }
   }

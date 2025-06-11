@@ -9,7 +9,7 @@ export default function FillGapsTask({
   setUserProgress,
 }: {
   word: TypeWord;
-  onAnswer: (result: "correct" | "incorrect") => void;
+  onAnswer: (result: boolean) => void;
   onNext: () => void;
 }) {
   const [answer, setAnswer] = useState<string>("");
@@ -29,9 +29,7 @@ export default function FillGapsTask({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanedAnswer = answer.trim().toLowerCase();
-    onAnswer(
-      cleanedAnswer === word.word.toLowerCase() ? "correct" : "incorrect"
-    );
+    onAnswer(cleanedAnswer === word.word.toLowerCase());
     setAnswer("");
   };
 

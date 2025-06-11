@@ -9,7 +9,7 @@ export default function WriteWordTask({
   onNext,
 }: {
   correctWord: TypeWord;
-  onAnswer: (result: "correct" | "incorrect") => void;
+  onAnswer: (result: boolean) => void;
   onNext: () => void;
 }) {
   const [answer, setAnswer] = useState<string>("");
@@ -30,11 +30,7 @@ export default function WriteWordTask({
     const cleanedAnswer = answer.trim().toLowerCase();
     const expectedAnswer =
       askFor === "word" ? correctWord.word : correctWord.translation;
-    if (cleanedAnswer === expectedAnswer.toLowerCase()) {
-      onAnswer("correct");
-    } else {
-      onAnswer("incorrect");
-    }
+    onAnswer(cleanedAnswer === expectedAnswer.toLowerCase());
     setAnswer("");
   };
 

@@ -11,7 +11,7 @@ export default function MatchPictureTask({
 {
   correctWord: TypeWord;
   options: TypeWord[];
-  onAnswer: (result: "correct" | "incorrect") => void;
+  onAnswer: (result: boolean) => void;
   onNext: () => void;
   // setUserProgress: () => void;
 }) {
@@ -23,8 +23,7 @@ export default function MatchPictureTask({
 
   const handleCheck = () => {
     if (!selected) return;
-    const result = selected === correctWord.word ? "correct" : "incorrect";
-    onAnswer(result);
+    onAnswer(selected === correctWord.word);
   };
 
   return (
