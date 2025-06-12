@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { handleCheck } from "../utils";
+import { handleCheck, getRandomTask } from "../utils";
 
 describe('handleCheck', () => {
   it('should call onAnswer with "correct" when selected matches answer', () => {
@@ -20,3 +20,10 @@ describe('handleCheck', () => {
     expect(mockFn).not.toHaveBeenCalled();
   });
 });
+
+describe('getRandomTask', () => {
+  it('should return a string', () => {
+    const result = getRandomTask()
+    expect(typeof result).toBe("string")
+  })
+})
