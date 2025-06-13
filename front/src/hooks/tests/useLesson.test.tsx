@@ -7,13 +7,31 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 // test data
 const mockWords = [
-  { word: "apple", category: "fruit" },
-  { word: "banana", category: "fruit" },
+  {
+    id: 1,
+    word: "apple",
+    category: "fruit",
+    example: "I eat an apple every day.",
+    translation: "manzana",
+    translationExample: "Como una manzana cada día.",
+    pronunciation: "///",
+    picture: "apple.jpg",
+  },
+  {
+    id: 2,
+    word: "banana",
+    category: "fruit",
+    example: "Bananas are yellow.",
+    translation: "plátano",
+    translationExample: "Los plátanos son amarillos.",
+    pronunciation: "///",
+    picture: "banana.jpg",
+  },
 ];
 
 // instead of `const mockProgress = { wordsProgress: [], };` as a factory func it will ensure fresh data and test isonlation
 const getMockProgress = () => ({
-  //  userid?
+  userID: "123",
   wordsProgress: [],
 });
 
@@ -64,7 +82,11 @@ describe("useLesson", () => {
       const { result } = renderHook(() => useLesson(), { wrapper });
       // calls the hook function
       act(() => {
-        result.current.handleAnswerSubmit(true);
+        result.current.handleAnswerSubmit(
+          getMockProgress(),
+          mockWords[0],
+          true
+        );
       });
       //  asserts
       expect(result.current.feedback).toBe("Well Done!");
@@ -75,7 +97,11 @@ describe("useLesson", () => {
       const { result } = renderHook(() => useLesson(), { wrapper });
 
       act(() => {
-        result.current.handleAnswerSubmit(false);
+        result.current.handleAnswerSubmit(
+          getMockProgress(),
+          mockWords[0],
+          false
+        );
       });
 
       expect(result.current.feedback).toBe("Try again!");

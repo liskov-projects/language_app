@@ -1,7 +1,10 @@
+// hooks
 import { useState } from "react";
 import { useWordsContext } from "../context/WordsContext";
 import { useParams } from "react-router-dom";
+// types
 import { TypeUserProgress, TypeWord } from "../Types";
+// utilities
 import { getRandomTask, addWordToProgress, updateBox } from "../utils/utils";
 
 const useLesson = () => {
@@ -49,8 +52,10 @@ const useLesson = () => {
   //  NEW:
   const handleSaveProgress = async (
     lessonResults: TypeUserProgress,
-    userId: string
+    userId: string | null
   ) => {
+    if (!userId) return;
+
     const response = await fetch(
       `http://localhost:8081/user_progress/${userId}`,
       {
