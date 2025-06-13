@@ -1,28 +1,28 @@
+// hooks
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../../context/UserDataContext";
+import useLesson from "../../hooks/useLesson";
+// utilities
+import { getLessonProgress } from "../../utils/utils";
+// components
 import MatchPictureTask from "../LessonTasks/MatchPictureTask";
 import WriteWordTask from "../LessonTasks/WriteWordTask";
 import FillGapsTask from "../LessonTasks/FillGapsTask";
 import LittleBlobVariation from "../Buttons/LittleBlobVariation";
-import { useNavigate } from "react-router-dom";
 import FeedbackMessage from "../LessonTasks/FeedbackMessage";
 import LessonProgress from "../LessonTasks/LessonProgress";
-import { useUserDataContext } from "../../context/UserDataContext";
-import useLesson from "../../hooks/useLesson";
-import { useState, useEffect } from "react";
-import { TypeUserProgress } from "../../Types";
-// import cloneDeep from 'lodash-es/cloneDeep';
 
 export default function LessonPage() {
   // state helps persist pictures after the shuffle function
   const [pictureOptions, setPictureOptions] = useState<typeof lessonWords>([]);
-  const { currentUser, userProgress, saveLessonProgress } =
-    useUserDataContext();
-
-  // console.log("Initial progress:", userProgress);
+  const { currentUser, userProgress } = useUserDataContext();
 
   const {
     handleAnswerSubmit,
     handleNextTask,
     handleRestart,
+    handleSaveProgress,
     index,
     currentTask,
     currentWord,
@@ -40,7 +40,7 @@ export default function LessonPage() {
     return [...array].sort(() => Math.random() - 0.5);
   }
 
-  //  NEW: fixes the pictures re-shiffle on every render moved out of renderTask
+  //  fixes the pictures re-shiffle on every render moved out of renderTask
   useEffect(() => {
     if (currentTask === "matchPicture" && currentWord) {
       const shuffled = shuffle(
@@ -87,14 +87,13 @@ export default function LessonPage() {
 
   // console.log("userProgress", userProgress);
 
-  const getLessonProgress = (): TypeUserProgress | null => {
-    if (!userProgress) return null;
-    const copyUserProgress: TypeUserProgress = {
-      userID: userProgress.userID,
-      levelUp: userProgress.levelUp,
-      wordsProgress: userProgress.wordsProgress.filter(word => lessonWords.some((lessonWord) => lessonWord.word === word.word))
-    };
-    return copyUserProgress;
+  // NEW:
+  const handleOnClick = async () => {
+    if (!userProgress) return;
+    const lessonProgress = getLessonProgress(userProgress, lessonWords);
+    if (!lessonProgress || !currentUser) return;
+    handleSaveProgress(lessonProgress, currentUser.id);
+    navigate(`/study`);
   };
 
   return (
@@ -118,16 +117,7 @@ export default function LessonPage() {
                 correctly.
               </p>
               <LittleBlobVariation label="restart" onClick={handleRestart} />
-              {/* TODO: */}
-              <LittleBlobVariation
-                label="ok"
-                onClick={() => {
-                  // const filteredLessonProgress = getLessonProgress();
-                  saveLessonProgress(getLessonProgress(), currentUser?.id);
-                  // console.log("LESSON RESULTS", filteredLessonProgress);
-                  navigate(`/study`);
-                }}
-              />
+              <LittleBlobVariation label="ok" onClick={handleOnClick} />
             </div>
           ) : (
             <div className="container mx-auto px-4 ">{renderTask()}</div>

@@ -5,7 +5,6 @@ export function getRandomTask() {
     return tasks[Math.floor(Math.random() * tasks.length)]
 }
 
-// For TEST:
 export function handleCheck(selected: string | null, answer: string, onAnswer: (result: boolean) => void) {
     if (!selected) return;
     onAnswer(selected === answer);
@@ -64,3 +63,14 @@ export function handleCheck(selected: string | null, answer: string, onAnswer: (
         if (result === "correct") newBox = item.box < 5 ? item.box + 1 : 5;
         else newBox = 1 < item.box ? item.box - 1 : 1;
   }
+
+//  helper for handleSaveProgress
+  export function getLessonProgress(userProgress: TypeUserProgress, lessonWords: TypeWord[]){
+    if (!userProgress) return null;
+    return {
+      userID: userProgress.userID,
+      wordsProgress: userProgress.wordsProgress.filter((word) =>
+        lessonWords.some((lessonWord) => lessonWord.word === word.word)
+      ),
+    };
+  };
