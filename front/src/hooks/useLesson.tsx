@@ -46,6 +46,23 @@ const useLesson = () => {
     }
   }
 
+  //  NEW:
+  const handleSaveProgress = async (
+    lessonResults: TypeUserProgress,
+    userId: string
+  ) => {
+    const response = await fetch(
+      `http://localhost:8081/user_progress/${userId}`,
+      {
+        method: "POST",
+        body: JSON.stringify(lessonResults),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (!response.ok) throw new Error("POST request for user Progress failed");
+  };
+
   function handleRestart() {
     setIndex(0);
     setCorrectCount(0);
@@ -56,6 +73,7 @@ const useLesson = () => {
   return {
     handleAnswerSubmit,
     handleNextTask,
+    handleSaveProgress,
     handleRestart,
     index,
     currentTask,

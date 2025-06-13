@@ -66,23 +66,6 @@ export function UserDataContextProvider({
 
   const isLoggedIn = currentUser !== null;
 
-  //  REVIEW: dp we need both args?
-  const saveLessonProgress = async (
-    lessonResults: TypeUserProgress,
-    userId: string
-  ) => {
-    const response = await fetch(
-      `http://localhost:8081/user_progress/${userId}`,
-      {
-        method: "POST",
-        body: JSON.stringify(lessonResults),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-
-    if (!response.ok) throw new Error("POST request for user Progress failed");
-  };
-
   return (
     <UserDataContext.Provider
       value={{
@@ -95,7 +78,6 @@ export function UserDataContextProvider({
         logout,
         isLoggedIn,
         fetchUserProgress,
-        saveLessonProgress,
       }}
     >
       {children}
