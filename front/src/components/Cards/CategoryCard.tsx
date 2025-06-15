@@ -5,6 +5,7 @@ import { useUserDataContext } from "../../context/UserDataContext";
 import { TypeCategory } from "../../Types";
 import { useWordsContext } from "../../context/WordsContext";
 import { useEffect, useState } from "react";
+import { useColorContext } from "../../context/ColorContext";
 
 // Common setting for progress display
 const commonLineColor = "#ef8e00";
@@ -25,6 +26,7 @@ export default function CategoryCard({
   const navigate = useNavigate();
   const { words } = useWordsContext();
   const { userProgress } = useUserDataContext();
+  const { containerColor, cardTextColor } = useColorContext();
 
   const [categoryWordCount, setCategoryWord] = useState<number>(0);
   const [masteredWordCount, setMasteredWordCount] = useState<number>(0);
@@ -92,7 +94,7 @@ export default function CategoryCard({
 
   return (
     <div
-      className="flex flex-col items-center justify-center bg-white shadow-lg rounded-lg p-4 text-center cursor-pointer hover:shadow-xl transition"
+      className={`flex flex-col items-center justify-center shadow-lg rounded-lg p-4 text-center bg-[${containerColor}] text-[${cardTextColor}] cursor-pointer hover:shadow-xl transition`}
       onClick={() => navigate(`/${route}/${category.name}`)}
     >
       <h2 className="text-lg md:text-xl font-semibold p-2">{category.name}</h2>

@@ -1,6 +1,9 @@
+import { useColorContext } from "../context/ColorContext";
+
 export default function Footer() {
+  const { containerColor, defaultTextColor } = useColorContext();
   return (
-    <footer className="bg-desert text-center text-mocha-base font-mont p-4 mt-4">
+    <footer className={`bg-[${containerColor}] text-center text-[${defaultTextColor}] font-mont p-4`}>
       <p className="flex items-center justify-center gap-2">
         &copy; {new Date().getFullYear()} Vera & May @ liskov developing. All
         sources from freelang.net

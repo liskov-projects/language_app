@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
+import { useColorContext } from "../../context/ColorContext";
 
 type FillGapsTaskProps = BaseTaskProps & {
   word: TypeWord;
@@ -24,6 +25,8 @@ export default function FillGapsTask({
     setAnswer("");
   };
 
+  const { frameBackgroundColor } = useColorContext();
+
   return (
     <>
       <div className="w-full flex justify-center">
@@ -38,7 +41,7 @@ export default function FillGapsTask({
           <input
             value={answer}
             onChange={handleChange}
-            className="border border-2 rounded focus:border-none focus:outline-none focus:ring-2 focus:ring-desert w-full py-1 px-2"
+            className={`border border-2 rounded focus:border-none focus:outline-none focus:ring-2 focus:ring-[${frameBackgroundColor}] w-full py-1 px-2`}
             placeholder="Your answer"
           />
           <div className="flex flex-row sm:flex-row gap-4 mt-4 w-full justify-center">

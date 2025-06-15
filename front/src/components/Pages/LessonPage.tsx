@@ -12,11 +12,13 @@ import FillGapsTask from "../LessonTasks/FillGapsTask";
 import LittleBlobVariation from "../Buttons/LittleBlobVariation";
 import FeedbackMessage from "../LessonTasks/FeedbackMessage";
 import LessonProgress from "../LessonTasks/LessonProgress";
+import { useColorContext } from "../../context/ColorContext";
 
 export default function LessonPage() {
   // state helps persist pictures after the shuffle function
   const [pictureOptions, setPictureOptions] = useState<typeof lessonWords>([]);
-  const { currentUser, userProgress } = useUserDataContext();
+  const { currentUser, userProgress, saveLessonProgress } = useUserDataContext();
+  const { frameBorderColor, defaultTextColor, containerColor } = useColorContext();
 
   const {
     handleAnswerSubmit,
@@ -107,7 +109,7 @@ export default function LessonPage() {
       </div>
       <div className="p-4 max-w-4xl w-full mx-auto flex flex-col justify-center items-center sm:p-6 md:p-8">
         {/* NOTE: lesson container */}
-        <div className="w-full flex flex-col border border-2 border-sand-base rounded p-4 mt-4 bg-shell shadow-lg sm:p-6 md:p-8">
+        <div className={`w-full flex flex-col border border-2 border-[${frameBorderColor}] rounded p-4 mt-4 bg-[${containerColor}] text-[${defaultTextColor}] shadow-lg sm:p-6 md:p-8`}>
           {/* <h2 className="text-2xl font-bold mb-4">Lesson</h2> */}
           {lessonComplete ? (
             <div className="text-center space-y-4">

@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 // components
 import CategoryCard from "../Cards/CategoryCard";
 import { BlobButton } from "../Buttons/BlobButton";
+import { useColorContext } from "../../context/ColorContext";
 
 export default function StudyPage() {
   const { categories } = useWordsContext();
+  const { defaultTextColor } = useColorContext();
   const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center p-6">
-      <h1 className="text-sm md:text-xl font-bold mb-4">Choose a Category</h1>
+      <h1 className={`text-sm md:text-xl font-bold mb-4 text-[${defaultTextColor}]`}>Choose a Category</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-4xl">
         {categories.map((category) => (
@@ -28,7 +30,7 @@ export default function StudyPage() {
           let randomCategory = categories[Math.floor(Math.random() * categories.length)];
           navigate(`/study/${randomCategory.name}/:lesson`);
         }}
-        textColour="shell"
+        textColour={`[${defaultTextColor}]`}
       />
     </div>
   );

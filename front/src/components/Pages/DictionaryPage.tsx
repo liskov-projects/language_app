@@ -6,6 +6,7 @@ import { useWordsContext } from "../../context/WordsContext";
 import { TypeWord } from "../../Types";
 //components
 import WordCard from "../Cards/WordCard";
+import { useColorContext } from "../../context/ColorContext";
 
 export default function DictoinaryPage() {
   // TODO: Context task
@@ -13,6 +14,7 @@ export default function DictoinaryPage() {
   const [selectedWord, setSelectedWord] = useState<TypeWord | null>(null);
 
   const { words } = useWordsContext();
+  const { frameBackgroundColor, buttonTextColor, frameBorderColor } = useColorContext();
 
   useEffect(() => {
     // picks a random word
@@ -35,15 +37,14 @@ export default function DictoinaryPage() {
       {/* LEFT side */}
       <div className="m-2 w-full sm:w-1/3 flex flex-col font-winky">
         <input
-          className="border border-gray-300 rounded hover:border-desert form-input opacity-60 hover:opacity-90 w-full"
+          className={`border border-[${frameBorderColor}] rounded form-input 
+                    bg-[${buttonTextColor}] focus:ring-[${frameBorderColor}] opacity-60 hover:opacity-90 w-full`}
           type="text"
           placeholder="search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <div
-          className={`overflow-y-auto sm:h-full border border-gray-300 rounded p-2`}
-        >
+        <div className={`overflow-y-auto sm:h-full border border-2 border-[${frameBorderColor}] rounded p-2 bg-[${frameBackgroundColor}]`}>
           {filteredWords.map((word, idx) => (
             <DictionaryItem
               word={word}
@@ -72,14 +73,17 @@ function DictionaryItem({
   clickEvent: React.Dispatch<React.SetStateAction<TypeWord | null>>;
 }) {
   const [showImageCard, setShowImageCard] = useState<boolean>(false);
-  const toggleImageCardState = () => {
-    setShowImageCard(!showImageCard);
-  };
 
-  const textColor = `${selected ? "bg-desert text-shell" : "hover:bg-gray-200 hover:text-mocha-base text-mocha-base"}`;
+  const { defaultTextColor, frameBackgroundColor, frameBorderColor } = useColorContext();
+
+  const toggleImageCardState = () => { setShowImageCard(!showImageCard); };
+
+  const textColor = selected
+    ? `bg-[${frameBackgroundColor}] text-[${defaultTextColor}]`
+    : `hover:bg-gray-200 hover:text-black-200`;
 
   return (
-    <div className={`flex-row mb-2 border-b border-mocha-base `}>
+    <div className={`flex-row mb-2 border-b border-[${frameBorderColor}] text-[${defaultTextColor}]`}>
       <div className={`flex justify-between p-2 ${textColor} text-lg`}>
         <p
           className="flex-1 cursor-pointer"

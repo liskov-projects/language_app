@@ -5,10 +5,12 @@ import { useUserDataContext } from "../../context/UserDataContext";
 //  types
 import { TypeWordProgress } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
+import { useColorContext } from "../../context/ColorContext";
 
 export default function CategoryProgressPage() {
   const [search, setSearch] = useState("");
   const { userProgress } = useUserDataContext();
+  const { defaultTextColor, frameBackgroundColor, buttonTextColor } = useColorContext();
   const pathname = useParams();
   //  WORKS: data as expected
   // console.log("pathname", pathname);
@@ -28,9 +30,10 @@ export default function CategoryProgressPage() {
   return (
     <div className="m-3 flex gap-6 h-screen items-start justify-center">
       {wordsToShow.length > 0 ? (
-        <div className="flex w-full flex-col text-mocha-base font-winky">
+        <div className={`flex w-full flex-col text-[${defaultTextColor}] font-winky`}>
           <input
-            className="border border-gray-300 rounded mb-2 hover:border-desert form-input opacity-60 hover:opacity-90"
+            className={`border border-gray-300 rounded mb-2 hover:border-[${frameBackgroundColor}] form-input 
+                      bg-[${buttonTextColor}] focus:ring-[${frameBackgroundColor}] opacity-60 hover:opacity-90`}
             type="text"
             placeholder="search..."
             value={search}
@@ -72,10 +75,11 @@ const WordEntry = ({
 
 const EmptyProgressList = ({ path }: { path: string | undefined }) => {
   const navigate = useNavigate();
+  const { frameBackgroundColor, defaultTextColor, frameBorderColor, containerColor } = useColorContext();
 
   return (
-    <div className="form-box mt-8">
-      <p className="flex text-xl tracking-widest text-desert font-semibold font-winky py-4">
+    <div className={`form-box bg-[${defaultTextColor}] border-[${frameBackgroundColor}] bg-[${containerColor}] mt-8`}>
+      <p className={`flex text-xl tracking-widest text-[${frameBackgroundColor}] font-semibold font-winky py-4`}>
         No progress... Yet
       </p>
       <LittleBlobButton

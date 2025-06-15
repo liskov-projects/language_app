@@ -67,3 +67,17 @@ export interface TypeUserDataContext {
   saveLessonProgress: (lessonResults: TypeUserProgress | null, userId: string) => void;
   fetchUserProgress: (userId: string) => void;
 }
+
+export interface TypeColorContext {
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  darkMode: boolean;
+  baseColor: string;
+  containerColor: string;
+  buttonTextColor: string;
+  defaultTextColor: string;
+  cardTextColor: string;
+  frameBorderColor: string;
+  frameBackgroundColor: string;
+  correctColor: string;
+  alertColor: string;
+}

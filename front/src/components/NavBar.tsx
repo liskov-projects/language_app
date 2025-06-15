@@ -3,13 +3,15 @@ import { useUserDataContext } from "../context/UserDataContext";
 //  components
 import { Link } from "react-router-dom";
 import ThemeToggle from "./Buttons/ThemeToggle";
+import { useColorContext } from "../context/ColorContext";
 
 export default function NavBar() {
+  const { defaultTextColor } = useColorContext();
   const { isLoggedIn } = useUserDataContext();
 
   return (
     <nav>
-      <ul className="m-4 p-4 flex flex-row space-x-6 font-gummy text-mocha-base text-xl">
+      <ul className={`m-4 p-4 flex flex-row space-x-6 font-gummy text-[${defaultTextColor}] text-xl`}>
         <li className="nav-item">
           <Link to="/">Home</Link>
         </li>

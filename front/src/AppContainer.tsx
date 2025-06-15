@@ -14,49 +14,52 @@ import Loader from "./components/Loader";
 // context
 import { WordsContextProvider } from "./context/WordsContext";
 import { UserDataContextProvider } from "./context/UserDataContext";
+import { ColorContextProvider } from "./context/ColorContext";
 
 export default function AppContainer() {
   return (
-    <div className="relative flex flex-col min-h-screen bg-shell">
-      {/* sets the background image */}
-      <div
-        className="absolute inset-0 w-full h-full bg-center bg-cover opacity-20 z-0"
-        style={{ backgroundImage: "url('/trees.jpg')" }}
-      ></div>
-      {/* the rest of the app */}
-      <div className="relative z-10 flex flex-col flex-grow">
-        <Router>
-          <WordsContextProvider>
-            <UserDataContextProvider>
-              <div className="flex flex-grow">
-                <Layout>
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/signin" element={<SignInPage />} />
-                    <Route path="/dictionary" element={<DictionaryPage />} />
-                    <Route path="/study" element={<StudyPage />} />
-                    <Route
-                      path="/study/:category"
-                      element={<StudyCategoryPage />}
-                    />
-                    <Route
-                      path="/study/:category/:lesson"
-                      element={<LessonPage />}
-                    />
-                    <Route path="/progress" element={<UserProgressPage />} />
-                    <Route
-                      path="/progress/:category"
-                      element={<CategoryProgressPage />}
-                    />
-                    {/* development */}
-                    <Route path="/loader" element={<Loader />} />
-                  </Routes>
-                </Layout>
-              </div>
-            </UserDataContextProvider>
-          </WordsContextProvider>
-        </Router>
+    <ColorContextProvider>
+      <div className="flex flex-col min-h-screen">
+        {/* sets the background image */}
+        <div
+          className="absolute inset-0 w-full h-full bg-center bg-cover opacity-20 z-0"
+          style={{ backgroundImage: "url('/trees.jpg')" }}
+        ></div>
+        {/* the rest of the app */}
+        <div className="relative z-10 flex flex-col flex-grow">
+          <Router>
+            <WordsContextProvider>
+              <UserDataContextProvider>
+                <div className="flex flex-grow">
+                  <Layout>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/signin" element={<SignInPage />} />
+                      <Route path="/dictionary" element={<DictionaryPage />} />
+                      <Route path="/study" element={<StudyPage />} />
+                      <Route
+                        path="/study/:category"
+                        element={<StudyCategoryPage />}
+                      />
+                      <Route
+                        path="/study/:category/:lesson"
+                        element={<LessonPage />}
+                      />
+                      <Route path="/progress" element={<UserProgressPage />} />
+                      <Route
+                        path="/progress/:category"
+                        element={<CategoryProgressPage />}
+                      />
+                      {/* development */}
+                      <Route path="/loader" element={<Loader />} />
+                    </Routes>
+                  </Layout>
+                </div>
+              </UserDataContextProvider>
+            </WordsContextProvider>
+          </Router>
+        </div>
       </div>
-    </div>
+    </ColorContextProvider>
   );
 }

@@ -23,7 +23,7 @@ export default function StudyCategoryPage() {
         <LittleBlobButton
           label={"back"}
           onClick={() => navigate(`/study`)}
-          textColour="text-shell"
+          textColour="text-button-text"
         />
         <LittleBlobButton
           label={"study!"}

@@ -42,13 +42,13 @@ NEVER EVER TOUCH THE ORDER OR EVEN BETTER ANYTHING HERE */
 
 @theme {
   /* colours */
-  --color-shell: #eeeee4;
-  --color-sand-base: #c8985f;
-  --color-mocha-base: #4d4a46;
-  --color-black: #2f2116;
-  --color-desert: #ef8e00;
-  --color-green: #518d3c;
-  --color-red: #c24b34;
+  --color-button-text: #eeeee4;
+  --color-default-text: #4d4a46;
+  --color-card-text: #2f2116;
+  --color-frame-border: #ef8e00;
+  --color-frame-background: #c8985f;
+  --color-correct: #518d3c;
+  --color-alert: #c24b34;
 
   /* fonts */
   --font-marker: PermanentMarker-Regular, sans-serif;
@@ -62,26 +62,26 @@ NEVER EVER TOUCH THE ORDER OR EVEN BETTER ANYTHING HERE */
 
 @layer base {
   body {
-    @apply text-mocha-base;
+    @apply text-default-text;
   }
 }
 
 /* custom utility classes */
 @layer utilities {
   .form-box {
-    @apply w-full max-w-md sm:max-w-lg flex flex-col gap-4 items-center justify-center bg-mocha-base border-4 border-desert rounded-xl p-6 shadow-lg
+    @apply w-full max-w-md sm:max-w-lg flex flex-col gap-4 items-center justify-center border-4 rounded-xl p-6 shadow-lg
   }
   .form-heading {
-    @apply text-lg sm:text-xl font-semibold tracking-wider text-desert font-winky mb-2
+    @apply text-lg sm:text-xl font-semibold tracking-wider font-winky mb-2
   }
   .form-input {
-    @apply w-full mb-4 p-2 border-2 rounded bg-shell focus:border-none focus:outline-none focus:ring-4 focus:ring-desert;
+    @apply w-full mb-4 p-2 border-2 rounded /*focus:border-none focus:outline-none*/ focus:ring-4;
   }
   .error-message {
-    @apply text-red bg-shell px-2 rounded tracking-wide border-mocha-base font-winky;
+    @apply text-alert px-2 rounded tracking-wide font-winky;
   }
   .success-message {
-    @apply text-green bg-shell px-2 rounded tracking-wide border-mocha-base font-winky;
+    @apply px-2 rounded tracking-wide font-winky;
   }
   .nav-item {
     @apply hover:transform hover:scale-150 transition-transform duration-300 sm:text-xl md:text-2xl mx-4 md:mx-6;
@@ -91,7 +91,7 @@ NEVER EVER TOUCH THE ORDER OR EVEN BETTER ANYTHING HERE */
     @apply w-full max-w-screen-xl flex flex-col sm:flex-row flex-wrap justify-center gap-8 mt-10
   }
   .main-content-card {
-    @apply sm:basis-1/3 bg-white dark:bg-black dark:text-white opacity-70 shadow-md rounded-2xl p-6 text-center transition hover:shadow-lg
+    @apply sm:basis-1/3 opacity-70 shadow-md rounded-2xl p-6 text-center transition hover:shadow-lg
   }
   .blob-button-style {
     @apply relative w-32 h-16 sm:w-36 sm:h-20 md:w-40 md:h-24 transition-transform hover:-translate-y-1 cursor-pointer

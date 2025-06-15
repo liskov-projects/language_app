@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
 import { handleCheck } from "../../utils/utils";
+import { useColorContext } from "../../context/ColorContext";
 
 type MatchPictureTaskProps = BaseTaskProps & {
   correctWord: TypeWord;
@@ -15,6 +16,7 @@ export default function MatchPictureTask({
   onNext,
 }: MatchPictureTaskProps) {
   const [selected, setSelected] = useState<string | null>(null);
+  const { frameBorderColor, frameBackgroundColor } = useColorContext();
 
   return (
     <>
@@ -25,9 +27,9 @@ export default function MatchPictureTask({
         {options.map((opt) => (
           <div
             key={opt.word}
-            className={`border rounded  cursor-pointer p-2 hover:border-sand-base hover:border-3 shadow-lg ${
+            className={`border rounded cursor-pointer p-2 hover:border-[${frameBorderColor}] hover:border-3 shadow-lg ${
               selected === opt.word
-                ? "border-4 border-desert bg-white"
+                ? `border-4 border-[${frameBackgroundColor}] bg-white`
                 : "border"
             }`}
             onClick={() => setSelected(opt.word)}

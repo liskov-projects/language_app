@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BaseTaskProps, TypeWord } from "../../Types";
 import LittleBlobButton from "../Buttons/LittleBlobButton";
+import { useColorContext } from "../../context/ColorContext";
 
 //  NOTE: combining prop types
 type WriteWordTaskProps = BaseTaskProps & {
@@ -15,6 +16,8 @@ export default function WriteWordTask({
   const [answer, setAnswer] = useState<string>("");
   const [askFor, setAskFor] = useState<"word" | "translation">("word");
   // const {handleAnswerSubmit, handleNextTask} = useLesson();
+
+  const { buttonTextColor, frameBackgroundColor } = useColorContext();
 
   useEffect(() => {
     setAskFor(Math.random() < 0.5 ? "word" : "translation");
@@ -49,7 +52,7 @@ export default function WriteWordTask({
           <input
             value={answer}
             onChange={handleChange}
-            className="mb-4 w-full p-2 border border-2 rounded bg-shell focus:border-none focus:outline-none focus:ring-4 focus:ring-desert"
+            className={`mb-4 w-full p-2 border border-2 rounded bg-[${buttonTextColor}] focus:border-none focus:outline-none focus:ring-4 focus:ring-[${frameBackgroundColor}]`}
           />
           <div className="flex flex-row sm:flex-row gap-4 mt-4 w-full justify-center">
             <LittleBlobButton type="submit" label="check" />

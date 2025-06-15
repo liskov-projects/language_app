@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TypeUser } from "../../../Types";
 import LittleBlobButton from "../../Buttons/LittleBlobButton";
 import { useUserDataContext } from "../../../context/UserDataContext";
+import { useColorContext } from "../../../context/ColorContext";
 
 //  TODO: combine with SignUpWindow.tsx
 export default function LogInWindow() {
@@ -14,6 +15,7 @@ export default function LogInWindow() {
   });
 
   const { login } = useUserDataContext();
+  const { defaultTextColor, buttonTextColor, containerColor, frameBackgroundColor, correctColor } = useColorContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,8 +54,8 @@ export default function LogInWindow() {
 
   return (
     <div className="flex flex-col items-center w-full px-4">
-      <form onSubmit={handleSubmit} className="form-box">
-        <h1 className="form-heading">existing user</h1>
+      <form onSubmit={handleSubmit} className={`form-box border-[${frameBackgroundColor}] bg-[${containerColor}]`}>
+        <h1 className={`form-heading text-[${frameBackgroundColor}]`}>existing user</h1>
         <input
           type="text"
           name="username"
@@ -62,7 +64,7 @@ export default function LogInWindow() {
             setExistingUser({ ...existingUser, username: e.target.value })
           }
           placeholder="name"
-          className="form-input"
+          className={`form-input focus:ring-[${frameBackgroundColor}] bg-[${buttonTextColor}]`}
         />
         <input
           type="password"
@@ -72,17 +74,17 @@ export default function LogInWindow() {
             setExistingUser({ ...existingUser, password: e.target.value })
           }
           placeholder="password"
-          className="form-input"
+          className={`form-input focus:ring-[${frameBackgroundColor}] bg-[${buttonTextColor}]`}
         />
         <LittleBlobButton
           label={"log in"}
           type="submit"
-          textColour="text-mocha-base"
+          textColour={`text-[${defaultTextColor}]`}
         />
         {errorMessage ? (
-          <div className="error-message">{errorMessage}</div>
+          <div className={`error-message bg-[${buttonTextColor}] border-[${defaultTextColor}]`}>{errorMessage}</div>
         ) : (
-          <div className="success-message">{successMessage}</div>
+          <div className={`success-message text-[${correctColor}] bg-[${buttonTextColor}] border-[${defaultTextColor}]`}>{successMessage}</div>
         )}
       </form>
     </div>
